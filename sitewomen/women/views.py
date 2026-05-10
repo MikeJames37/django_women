@@ -6,7 +6,7 @@ from django.template.defaultfilters import title
 from django.urls import reverse
 from django.template.loader import render_to_string
 
-from women.models import Women, Category
+from women.models import Women, Category, TagPost
 
 menu = [{'title': 'О сайте', 'url_name': 'about'},
         {'title': 'Добавить статью', 'url_name': 'add_page'},
@@ -71,3 +71,15 @@ def show_category(request, cat_slug):
 
 def page_not_found(request, exception):
     return HttpResponseNotFound(f"<h1>Page not found</h1><p>exception: {exception}</p>")
+
+def show_tag_postlist(request, tag_slug):
+    tag = get_object_or_404(TagPost, slug=tag_slug)
+    posts = tag.tags.filter(is_published=Women.Status.PUBLISHED)
+
+    data = {
+        'title': f'Тег: {tag.tag}',
+        'menu': menu,
+        'posts': posts,
+        'cat_selected': None,
+    }
+    return render(request, 'women/index.html', context=data)
