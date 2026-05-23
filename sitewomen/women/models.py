@@ -1,3 +1,4 @@
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
@@ -22,7 +23,12 @@ class Women(models.Model):
 
     title = models.CharField(max_length=255, verbose_name='Заголовок')
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='Slug')
-    content = models.TextField(blank=True, verbose_name='Текст статьи')
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d', default=None, blank=True, null=True, verbose_name='Фото')
+    content = models.TextField(blank=True, verbose_name='Текст статьи',
+                               validators=[
+                                   MinLengthValidator(3, message='Минимум 3 символа'),
+                                   MaxLengthValidator(100, message='Максимум 100 символов'),
+                               ])
     time_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     time_updated = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
     is_published = models.IntegerField(choices=Status.choices, default=Status.DRAFT, verbose_name='Статус публикации')
@@ -44,7 +50,6 @@ class Women(models.Model):
         indexes = [
             models.Index(fields=['-time_created']),
         ]
-
 
     def get_absolute_url(self):
         return reverse('post', kwargs={'post_slug': self.slug})
@@ -85,3 +90,6 @@ class Husband(models.Model):
 
     def __str__(self):
         return self.name
+
+class UploadFiles(models.Model):
+    file = models.FileField(upload_to='uploads_model')
