@@ -8,11 +8,11 @@
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/sitewomen/db.sqlite3</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="db [2]" uuid="5967dff5-ae37-4d6f-b6e7-60171be25cd4">
+    <data-source source="LOCAL" name="db [2]" uuid="8b6bf9cc-837e-4929-ad78-78af8067046e">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$USER_HOME$/AppData/Local/Temp/2d8ab5e1-523a-47b7-a988-9a3a5f50bb41_58_sitewomen.zip.58_sitewomen.zip/sitewomen/db.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../django4-lessons-main/django4-lessons-main/72_sitewomen/sitewomen/db.sqlite3</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
