@@ -108,6 +108,7 @@ class WomenTag(DataMixin, ListView):
     context_object_name = 'posts'
     allow_empty = False
 
+
     def get_queryset(self):
         return Women.published.filter(tags__slug=self.kwargs['tag_slug']).select_related('cat')
 
