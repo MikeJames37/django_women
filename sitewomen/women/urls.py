@@ -1,4 +1,6 @@
 from django.urls import path, re_path, register_converter
+from django.views.decorators.cache import cache_page
+
 from . import views
 from . import converters
 
@@ -7,7 +9,7 @@ from . import converters
 urlpatterns = [
     path('', views.WomenHome.as_view(), name='home'),
     path('about/', views.about, name='about'),
-    path('contact/', views.contact, name='contact'),
+    path('contact/', views.ContactFormView.as_view(), name='contact'),
     path('addpage/', views.AddPage.as_view(), name='add_page'),
     path('login/', views.login, name='login'),
     path('post/<slug:post_slug>/', views.ShowPost.as_view(), name='post'),
